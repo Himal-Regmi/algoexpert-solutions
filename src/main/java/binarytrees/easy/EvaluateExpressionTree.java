@@ -1,6 +1,6 @@
 package binarytrees.easy;
 
-//O(n) and O(h)
+// O(n) and O(h)
 public class EvaluateExpressionTree {
   // This is an input class. Do not edit.
   static class BinaryTree {
