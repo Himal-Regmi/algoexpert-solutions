@@ -1,5 +1,6 @@
 package binarytrees.medium;
 
+// O(n) and O(h)
 public class BinaryTreeDiameter {
   // This is an input class. Do not edit.
   static class BinaryTree {
