@@ -2,7 +2,7 @@ package greedyalgorithms.easy;
 
 import java.util.Arrays;
 
-// O(n) and O(1)
+// O(nlogn) and O(1)
 public class MinimumWaitingTime {
   public int minimumWaitingTime(int[] queries) {
     Arrays.sort(queries);
