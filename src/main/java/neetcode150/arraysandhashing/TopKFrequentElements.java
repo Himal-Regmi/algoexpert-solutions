@@ -59,4 +59,38 @@ public class TopKFrequentElements {
       return res;
     }
   }
+
+  // O(n) & O(n)
+  class Solution3 {
+    public int[] topKFrequent(int[] nums, int k) {
+      Map<Integer, Integer> numFrequency = new HashMap<>();
+      for (int num : nums) {
+        numFrequency.put(num, numFrequency.getOrDefault(num, 0) + 1);
+      }
+
+      List<Integer>[] freq = new List[nums.length + 1];
+
+      for (int i = 0; i < freq.length; i++) {
+        freq[i] = new ArrayList<>();
+      }
+
+      for (Map.Entry<Integer, Integer> entry : numFrequency.entrySet()) {
+        freq[entry.getValue()].add(entry.getKey());
+      }
+
+      int[] topKFrequent = new int[k];
+      int currentIndex = 0;
+
+      for (int i = freq.length - 1; i > 0 && currentIndex < k; i--) {
+        for (int n : freq[i]) {
+          topKFrequent[currentIndex++] = n;
+          if (currentIndex == k) {
+            break;
+          }
+        }
+      }
+
+      return topKFrequent;
+    }
+  }
 }
