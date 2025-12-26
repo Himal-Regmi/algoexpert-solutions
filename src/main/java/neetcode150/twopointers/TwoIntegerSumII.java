@@ -1,4 +1,4 @@
-package neetcode150.slidingwindow;
+package neetcode150.twopointers;
 
 public class TwoIntegerSumII {
   class Solution {
