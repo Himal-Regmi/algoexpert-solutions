@@ -44,4 +44,46 @@ public class TimeBasedKeyValueStore {
       return latestValue;
     }
   }
+
+  // Time -> get - O(log n) & set - O(1)
+  // Space -> O(m * n) -> m - number of keys & n - number of items in a key
+  class TimeMap2 {
+
+    record TimeValuePair(int time, String value) {}
+    ;
+
+    Map<String, List<TimeValuePair>> timeMap;
+
+    public TimeMap() {
+      this.timeMap = new HashMap();
+    }
+
+    public void set(String key, String value, int timestamp) {
+      List<TimeValuePair> pairs = timeMap.computeIfAbsent(key, k -> new ArrayList<TimeValuePair>());
+      pairs.add(new TimeValuePair(timestamp, value));
+    }
+
+    public String get(String key, int timestamp) {
+      if (!this.timeMap.containsKey(key)) {
+        return "";
+      }
+      List<TimeValuePair> timeValuePairs = timeMap.get(key);
+
+      int leftIdx = 0;
+      int rightIdx = timeValuePairs.size() - 1;
+      String latestValue = "";
+      while (leftIdx <= rightIdx) {
+        int mid = leftIdx + ((rightIdx - leftIdx) / 2);
+
+        if (timeValuePairs.get(mid).time <= timestamp) {
+          latestValue = timeValuePairs.get(mid).value;
+          leftIdx = mid + 1;
+        } else {
+          rightIdx = mid - 1;
+        }
+      }
+
+      return latestValue;
+    }
+  }
 }
