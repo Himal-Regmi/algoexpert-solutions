@@ -50,11 +50,10 @@ public class TimeBasedKeyValueStore {
   class TimeMap2 {
 
     record TimeValuePair(int time, String value) {}
-    ;
 
     Map<String, List<TimeValuePair>> timeMap;
 
-    public TimeMap() {
+    public TimeMap2() {
       this.timeMap = new HashMap();
     }
 
