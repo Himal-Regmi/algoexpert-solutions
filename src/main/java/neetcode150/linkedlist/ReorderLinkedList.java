@@ -49,4 +49,50 @@ public class ReorderLinkedList {
       leftNode.next = null;
     }
   }
+
+  // O(n) & O(1)
+  class Solution2 {
+    public void reorderList(ListNode head) {
+
+      if (head == null || head.next == null) return;
+
+      ListNode slow = head;
+      ListNode fast = head;
+
+      while (fast != null && fast.next != null) {
+        slow = slow.next;
+        fast = fast.next.next;
+      }
+
+      ListNode secondHalf = slow.next;
+      slow.next = null;
+      ListNode firstHalf = head;
+
+      ListNode prevNode = null;
+      ListNode currentNode = secondHalf;
+
+      while (currentNode != null) {
+        ListNode nextNode = currentNode.next;
+        currentNode.next = prevNode;
+        prevNode = currentNode;
+        currentNode = nextNode;
+      }
+
+      ListNode reversedSecondHalf = prevNode;
+
+      ListNode p1 = firstHalf;
+      ListNode p2 = reversedSecondHalf;
+
+      while (p2 != null) {
+        ListNode temp1 = p1.next;
+        ListNode temp2 = p2.next;
+
+        p1.next = p2;
+        p2.next = temp1;
+
+        p1 = temp1;
+        p2 = temp2;
+      }
+    }
+  }
 }
