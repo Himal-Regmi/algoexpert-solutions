@@ -51,4 +51,26 @@ public class RemoveNodeFromEndOfList {
       return head;
     }
   }
+
+  // O(n) & O(1)
+  class Solution2 {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+      ListNode dummy = new ListNode(0, head);
+      ListNode leftNode = dummy;
+      ListNode rightNode = head;
+
+      for (int i = 0; i < n; i++) {
+        rightNode = rightNode.next;
+      }
+
+      while (rightNode != null) {
+        leftNode = leftNode.next;
+        rightNode = rightNode.next;
+      }
+
+      leftNode.next = leftNode.next.next;
+
+      return dummy.next;
+    }
+  }
 }
